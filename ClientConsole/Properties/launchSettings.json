@@ -1,0 +1,16 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "Instance": "https://login.microsoftonline.com/",
+  "TenantId": "f5bf4c7b-fb6d-4d27-955c-743eb769533b",
+  "ClientId": "414f0c22-2eb2-4588-9f64-c8f8df53a793",
+  "ClientSecret": "2SS7Q~CKseOg3t~3ZTISuFYZCjEing_kKQCGU",
+  "BaseAddress": "http://localhost:81/api/users",
+  "ResourceId": "api://0f05f539-b7e8-4d7c-899d-21d0e2693702/.default"
+}
