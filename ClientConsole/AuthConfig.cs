@@ -14,6 +14,7 @@
         public string ClientSecret { get; set; }
         public string BaseAddress { get; set; }
         public string ResourceId { get; set; }
+        public string VendorId { get; set; }
 
         public static AuthConfig ReadFromJsonFile(string path)
         {

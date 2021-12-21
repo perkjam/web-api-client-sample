@@ -46,9 +46,9 @@ namespace Perkjam.Client
                 Console.ResetColor();
             }
             Console.WriteLine();
-            Console.WriteLine("Press enter to retrieve users from the Web API");
-            Console.ReadLine();
-            Console.WriteLine();
+            //Console.WriteLine("Press enter to retrieve users from the Web API");
+            //Console.ReadLine();
+            //Console.WriteLine();
 
             if (!string.IsNullOrEmpty(result?.AccessToken))
             {
@@ -62,29 +62,36 @@ namespace Perkjam.Client
 
                 defaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.AccessToken);
 
-                HttpResponseMessage response = await httpClient.GetAsync(config.BaseAddress);
-                if (response.IsSuccessStatusCode)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    string json = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine("Retrieving users from Web API:");
-                    Console.WriteLine(json);
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Failed to call the Web Api: {response.StatusCode}");
-                    string content = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine($"Content: {content}");
-                }
-                Console.WriteLine();
+                //HttpResponseMessage response = await httpClient.GetAsync(config.BaseAddress);
+                //if (response.IsSuccessStatusCode)
+                //{
+                //    Console.ForegroundColor = ConsoleColor.Green;
+                //    string json = await response.Content.ReadAsStringAsync();
+                //    Console.WriteLine("Retrieving users from Web API:");
+                //    Console.WriteLine(json);
+                //}
+                //else
+                //{
+                //    Console.ForegroundColor = ConsoleColor.Red;
+                //    Console.WriteLine($"Failed to call the Web Api: {response.StatusCode}");
+                //    string content = await response.Content.ReadAsStringAsync();
+                //    Console.WriteLine($"Content: {content}");
+                //}
+                //Console.WriteLine();
 
                 Console.WriteLine("Post a new user to the database");
                 Console.WriteLine("Enter new user name for testing [example 'Donald Duck']:");
                 var newUserName = Console.ReadLine();
                 Console.WriteLine("Enter new user email for testing [example 'donald@gmail.com']:");
                 var newUserEmail = Console.ReadLine();
-                var newUserEmailAddress = new { Name = newUserName, Email = newUserEmail, ClientUserId = "TeslaClientId", ClientId = config.ClientId };
+                var newUserEmailAddress = new 
+                { 
+                    Name = newUserName, 
+                    Email = newUserEmail, 
+                    ClientUserId = "TeslaClientId", 
+                    ClientId = config.ClientId, 
+                    VendorId = config.VendorId 
+                };
                 HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(newUserEmailAddress));
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
