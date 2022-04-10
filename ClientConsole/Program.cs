@@ -62,7 +62,8 @@ namespace Perkjam.Client
 
                 defaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.AccessToken);
 
-                //HttpResponseMessage response = await httpClient.GetAsync(config.BaseAddress);
+                //HttpResponseMessage response = await httpClient.GetAsync(config.BaseAddress + "users");
+                HttpResponseMessage response = await httpClient.GetAsync(config.BaseAddress + "powerups");
                 //if (response.IsSuccessStatusCode)
                 //{
                 //    Console.ForegroundColor = ConsoleColor.Green;
@@ -79,33 +80,59 @@ namespace Perkjam.Client
                 //}
                 //Console.WriteLine();
 
-                Console.WriteLine("Post a new user to the database");
-                Console.WriteLine("Enter new user name for testing [example 'Donald Duck']:");
-                var newUserName = Console.ReadLine();
+                //Console.WriteLine("Post a new user to the database");
+                //Console.WriteLine("Enter new user name for testing [example 'Donald Duck']:");
+                //var newUserName = Console.ReadLine();
+                //Console.WriteLine("Enter new user email for testing [example 'donald@gmail.com']:");
+                //var newUserEmail = Console.ReadLine();
+                //var newUserEmailAddress = new 
+                //{ 
+                //    Name = newUserName, 
+                //    Email = newUserEmail, 
+                //    ClientUserId = "TeslaClientId", 
+                //    ClientId = config.ClientId, 
+                //    VendorId = config.VendorId 
+                //};
+                //HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(newUserEmailAddress));
+                //httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                //var postResponse = await httpClient.PostAsync(config.BaseAddress + "users", httpContent);
+                //if (postResponse.IsSuccessStatusCode)
+                //{
+                //    Console.ForegroundColor = ConsoleColor.Green;
+                //    Console.WriteLine("Successfully posted new user to database:");
+                //}
+                //else
+                //{
+                //    Console.ForegroundColor = ConsoleColor.Red;
+                //    Console.WriteLine($"Failed to call the Web Api and post new user to database: {postResponse.StatusCode}");
+                //}
+
+                Console.WriteLine("Post a new PowerUp to the database");
+                Console.WriteLine("Enter new client id for testing [example 123]:");
+                var newClientId = Console.ReadLine();
                 Console.WriteLine("Enter new user email for testing [example 'donald@gmail.com']:");
                 var newUserEmail = Console.ReadLine();
-                var newUserEmailAddress = new 
-                { 
-                    Name = newUserName, 
-                    Email = newUserEmail, 
-                    ClientUserId = "TeslaClientId", 
-                    ClientId = config.ClientId, 
-                    VendorId = config.VendorId 
+                var newPowerUp = new
+                {
+                    ClientId = newClientId,
+                    Email = newUserEmail
                 };
-                HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(newUserEmailAddress));
+                var httpContent = new StringContent(JsonConvert.SerializeObject(newPowerUp));
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                var postResponse = await httpClient.PostAsync(config.BaseAddress, httpContent);
+                var postResponse = await httpClient.PostAsync(config.BaseAddress + "powerup", httpContent);
                 if (postResponse.IsSuccessStatusCode)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Successfully posted new user to database:");
+                    Console.WriteLine("Successfully posted new PowerUp to database:");
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Failed to call the Web Api and post new user to database: {postResponse.StatusCode}");
+                    Console.WriteLine($"Failed to call the Web Api and post new PowerUp email to database: {postResponse.StatusCode}");
                 }
+
                 Console.ResetColor();
             }
         }
