@@ -62,8 +62,8 @@ namespace Perkjam.Client
 
                 defaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.AccessToken);
 
-                //HttpResponseMessage response = await httpClient.GetAsync(config.BaseAddress + "users");
-                HttpResponseMessage response = await httpClient.GetAsync(config.BaseAddress + "powerups");
+                // Test Users functionality
+                // ========================
                 //if (response.IsSuccessStatusCode)
                 //{
                 //    Console.ForegroundColor = ConsoleColor.Green;
@@ -121,7 +121,7 @@ namespace Perkjam.Client
                 var httpContent = new StringContent(JsonConvert.SerializeObject(newPowerUp));
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                var postResponse = await httpClient.PostAsync(config.BaseAddress + "powerup", httpContent);
+                var postResponse = await httpClient.PostAsync(config.BaseAddress + "powerups", httpContent);
                 if (postResponse.IsSuccessStatusCode)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
