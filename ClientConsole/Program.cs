@@ -31,7 +31,7 @@ namespace ClientConsole
             };
             var httpContent = new StringContent(JsonConvert.SerializeObject(postData));
             httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var response = await httpClient.PutAsync(config.BaseAddress + "offers/123", httpContent);
+            var response = await httpClient.PutAsync(config.BaseAddress + "offers/replace-cinema-offer-url", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
