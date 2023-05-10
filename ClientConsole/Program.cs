@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using Microsoft.Identity.Client;
+using Newtonsoft.Json;
 
 namespace ClientConsole
 {
@@ -21,24 +22,48 @@ namespace ClientConsole
 
             var httpClient = ConfigureClient(accessToken);
             
-            // Test API Access
-            // ===============
-            Console.WriteLine("Test API access");
-            var testResponse = await httpClient.GetAsync(config.BaseAddress + "test/unauthorised");
-            // var testResponse = await httpClient.GetAsync(config.BaseAddress + "test/authorised");
-            // var testResponse = await httpClient.GetAsync(config.BaseAddress + "test/authorised-check-database-connection");
-            if (testResponse.IsSuccessStatusCode)
+            // Call Replace Offer Endpoint
+            // ===========================
+            Console.WriteLine("Call Replace Offer Endpoint");
+            var postData = new 
+            { 
+                OfferUrl = "Test URL"
+            };
+            var httpContent = new StringContent(JsonConvert.SerializeObject(postData));
+            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var response = await httpClient.PutAsync(config.BaseAddress + "offers/123", httpContent);
+            if (response.IsSuccessStatusCode)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Successfully accessed PerkjamWebAPI");
+                Console.WriteLine("Successfully updated offer URL");
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Failed to call the Web Api: {testResponse.StatusCode}");
-                var content = await testResponse.Content.ReadAsStringAsync();
+                Console.WriteLine($"Failed to call the Web Api and update the offer URL: {response.StatusCode}");
+                var content = await response.Content.ReadAsStringAsync();
                 Console.WriteLine($"Content: {content}");
             }
+            
+            
+            // Test API Access
+            // ===============
+            // Console.WriteLine("Test API access");
+            // var testResponse = await httpClient.GetAsync(config.BaseAddress + "test/unauthorised");
+            // var testResponse = await httpClient.GetAsync(config.BaseAddress + "test/authorised");
+            // var testResponse = await httpClient.GetAsync(config.BaseAddress + "test/authorised-check-database-connection");
+            // if (testResponse.IsSuccessStatusCode)
+            // {
+            //     Console.ForegroundColor = ConsoleColor.Green;
+            //     Console.WriteLine("Successfully accessed PerkjamWebAPI");
+            // }
+            // else
+            // {
+            //     Console.ForegroundColor = ConsoleColor.Red;
+            //     Console.WriteLine($"Failed to call the Web Api: {testResponse.StatusCode}");
+            //     var content = await testResponse.Content.ReadAsStringAsync();
+            //     Console.WriteLine($"Content: {content}");
+            // }
 
             // Post a new user
             // ===============
