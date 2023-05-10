@@ -1,10 +1,7 @@
-﻿namespace Perkjam.Client
-{
-    using System;
-    using System.IO;
-    using System.Globalization;
-    using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 
+namespace ClientConsole
+{
     public class AuthConfig
     {
         public string Instance { get; set; } = "https://login.microsoftonline.com/";

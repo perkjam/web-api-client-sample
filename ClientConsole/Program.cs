@@ -1,13 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net.Http.Headers;
 using Microsoft.Identity.Client;
 using Newtonsoft.Json;
 
-namespace Perkjam.Client
+namespace ClientConsole
 {
     public class Program
     {
